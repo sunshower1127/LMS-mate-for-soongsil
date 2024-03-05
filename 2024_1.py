@@ -16,14 +16,10 @@ driver.url('https://lms.ssu.ac.kr/login')
 
 driver.find(name='userid').send_keys(id)
 driver.find(name='pwd').send_keys(pw)
-driver.find(tag='a', text='로그인').click()
+driver.find(text='로그인').click()
+driver.find(text='마이페이지').parent().click()
 
-driver.url('https://lms.ssu.ac.kr/mypage')
-
-time.sleep(4)
 driver.iframe()
 subjects = driver.find_all(raw='//' + conditions(tag='span', classes='xntc-title', text='동영상') + \
                            '/../' + conditions(tag='a', text='>0'))
 
-
-print(len(subjects))
