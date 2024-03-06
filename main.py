@@ -1,5 +1,5 @@
 from driver import Element, condition
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 def get_datetime(str) :
@@ -76,10 +76,11 @@ while True :
         web.find(title='재생').click()
         web.uncertain(lambda : web.find(text='예').click())
 
-        web.wait(10)
-
+        print(f'{title} : {str(timedelta(seconds=time_left))} 재생')
+        web.wait(time_left)
+        
         web.back()
-        web.uncertain(web.yes_to_alert)
+        web.uncertain(lambda : web.yes_to_alert())
 
     web.iframe('default')
     web.find(text_c='마이페이지').parent().click()
