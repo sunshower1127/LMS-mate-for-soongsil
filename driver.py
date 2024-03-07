@@ -163,6 +163,10 @@ class Element :
         driver.back()
 
 
+    def close(self) :
+        driver.close()
+    
+    
     def yes_to_alert(self) :
         wait.until(EC.alert_is_present())
         driver.switch_to.alert.accept()

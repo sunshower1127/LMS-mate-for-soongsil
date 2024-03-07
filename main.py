@@ -36,9 +36,12 @@ web.iframe('default', 'first')
 
 while True :
 
-    ''' 봐야할 강의영상이 있는 과목 찾기 '''    
-    subject_btns = web.find_all(raw='//' + condition(tag='span', css_class='xntc-title', text='동영상') + \
-                           '/../' + condition(tag='a', text_g=0))
+    ''' 봐야할 강의영상이 있는 과목 찾기 '''
+    try : 
+        subject_btns = web.find_all(raw='//' + condition(tag='span', css_class='xntc-title', text='동영상') + \
+                                    '/../' + condition(tag='a', text_g=0))
+    except :
+        break
 
     selected = False
     for subject_btn in subject_btns :
@@ -88,5 +91,5 @@ while True :
     ##########################################
 
 
-
+web.close()
 print('강의 자동 듣기 완료')
