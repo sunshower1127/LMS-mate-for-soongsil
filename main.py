@@ -86,6 +86,7 @@ while True:
         web.switch_iframe("first")
         web.find(title="재생").click()
         web.uncertain(lambda: web.find(text="예").click())
+        web.uncertain(lambda: web.find(text="확인").click())
 
         print(f"{title} : {str(timedelta(seconds=time_left))} 재생")
         web.wait_secs(time_left)
