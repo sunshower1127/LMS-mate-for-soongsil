@@ -1,5 +1,7 @@
-from sw_selenium.driver import SwChrome
-from sw_selenium.ui_manager import get_data_from_file_or_ui
+from enhanced_selenium import EnhancedChrome, debugger, get_data_from_file_or_ui
+
+debugger.start(__file__)
+
 
 id, pw = get_data_from_file_or_ui(
     file_path="숭실대계정정보.txt",
@@ -13,13 +15,13 @@ ban_list = get_data_from_file_or_ui(
     length="INF",
 )
 
-web = SwChrome(
+web = EnhancedChrome(
     timeout=10, keep_browser_open=False, prevent_sleep=True, popup=False, headless=True
 )
 
 web.get("https://lms.ssu.ac.kr/login")
 web.find(name="userid").send_keys(id)
-web.find(name="pwd").send_keys(pw, "\n")
+web.find(name="pwd").send_keys(pw + "\n")
 web.find(text="마이페이지").up().click()
 
 web.goto_frame("/fulliframe")
@@ -66,14 +68,16 @@ while True:
 
         web.goto_frame("0")
         web.find(title="재생").click()
-        with web.no_exc(), web.set_retry(10):
+        with web.no_error, web.set_repeat(10):
             web.find(text="예").click()
             web.find(text="확인").click()
         print("Watching", title)
-        web.wait(dur=2)
-        # web.wait(dur=(cur_dur, total_dur))
+        web.wait((cur_dur, total_dur))
         web.back()
 
     web.goto_frame("/")
     web.find(text_contains="마이페이지").up().click()
     web.goto_frame("tool_content")
+
+
+debugger.end()
