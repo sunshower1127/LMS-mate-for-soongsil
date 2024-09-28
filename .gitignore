@@ -1,5 +1,3 @@
-idpw.txt
-ban.txt
-__pycache__/
-old_ver.py
-test.py
+**/*.txt
+**/*.txt
+**/__pycache__/
